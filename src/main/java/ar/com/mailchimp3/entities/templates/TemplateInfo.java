@@ -1,4 +1,4 @@
-package ar.com.mailchimp3.entities;
+package ar.com.mailchimp3.entities.templates;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package ar.com.mailchimp3.entities;
+package ar.com.bit8.entities;
 
 import java.util.Map;
 

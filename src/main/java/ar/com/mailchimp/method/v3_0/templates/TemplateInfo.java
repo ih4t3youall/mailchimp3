@@ -1,4 +1,4 @@
-package ar.com.mailchimp3.entities.templates;
+package ar.com.mailchimp.method.v3_0.templates;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class TemplateInfo extends MailchimpObject{
 	@Field
 	private String share_url;
 	@Field
-	private List<Link> _link;
+	private List<MailchimpObject> _link;
 	
 	public Integer getId() {
 		return id;
@@ -106,10 +106,10 @@ public class TemplateInfo extends MailchimpObject{
 	public void setShare_url(String share_url) {
 		this.share_url = share_url;
 	}
-	public List<Link> get_link() {
+	public List<MailchimpObject> get_link() {
 		return _link;
 	}
-	public void set_link(List<Link> _link) {
+	public void set_link(List<MailchimpObject> _link) {
 		this._link = _link;
 	}
 	

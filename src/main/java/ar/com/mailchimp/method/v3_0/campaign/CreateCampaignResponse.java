@@ -1,11 +1,9 @@
-package ar.com.mailchimp3.entities.campaign;
+package ar.com.mailchimp.method.v3_0.campaign;
 
 import java.util.List;
 
 import com.ecwid.maleorang.MailchimpObject;
 import com.ecwid.maleorang.annotation.Field;
-
-import ar.com.mailchimp3.entities.templates.Link;
 
 public class CreateCampaignResponse extends MailchimpObject {
 
@@ -42,7 +40,7 @@ public class CreateCampaignResponse extends MailchimpObject {
 	@Field
 	private MailchimpObject delivery_status;
 	@Field
-	private List<Link> _links;
+	private List<MailchimpObject> _links;
 
 	public String getId() {
 		return id;
@@ -174,11 +172,11 @@ public class CreateCampaignResponse extends MailchimpObject {
 		this.delivery_status = delivery_status;
 	}
 
-	public List<Link> get_links() {
+	public List<MailchimpObject> get_links() {
 		return _links;
 	}
 
-	public void set_links(List<Link> _links) {
+	public void set_links(List<MailchimpObject> _links) {
 		this._links = _links;
 	}
 

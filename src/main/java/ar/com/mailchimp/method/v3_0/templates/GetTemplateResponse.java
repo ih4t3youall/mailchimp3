@@ -1,18 +1,18 @@
-package ar.com.mailchimp3.entities.templates;
+package ar.com.mailchimp.method.v3_0.templates;
 
 import java.util.List;
 
 import com.ecwid.maleorang.MailchimpObject;
 import com.ecwid.maleorang.annotation.Field;
 
-public class TemplateResponse extends MailchimpObject {
+public class GetTemplateResponse extends MailchimpObject {
 	
 	@Field
 	private List<TemplateInfo> templates;
 	@Field
 	private Integer total_items;
 	@Field
-	private List<Link> _links;
+	private List<MailchimpObject> _links;
 
 
 	public List<TemplateInfo> getTemplates() {
@@ -31,11 +31,11 @@ public class TemplateResponse extends MailchimpObject {
 		this.total_items = total_items;
 	}
 
-	public List<Link> get_links() {
+	public List<MailchimpObject> get_links() {
 		return _links;
 	}
 
-	public void set_links(List<Link> _links) {
+	public void set_links(List<MailchimpObject> _links) {
 		this._links = _links;
 	}
 

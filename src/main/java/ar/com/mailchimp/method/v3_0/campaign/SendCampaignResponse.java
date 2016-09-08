@@ -1,4 +1,4 @@
-package ar.com.mailchimp3.entities.campaign;
+package ar.com.mailchimp.method.v3_0.campaign;
 
 import com.ecwid.maleorang.MailchimpObject;
 import com.ecwid.maleorang.annotation.Field;

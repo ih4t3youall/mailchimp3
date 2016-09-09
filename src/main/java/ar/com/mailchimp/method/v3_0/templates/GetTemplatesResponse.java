@@ -5,12 +5,14 @@ import java.util.List;
 import com.ecwid.maleorang.MailchimpObject;
 import com.ecwid.maleorang.annotation.Field;
 
-public class GetTemplateResponse extends MailchimpObject {
+public class GetTemplatesResponse extends MailchimpObject {
 	
 	@Field
 	private List<TemplateInfo> templates;
+	
 	@Field
 	private Integer total_items;
+	
 	@Field
 	private List<MailchimpObject> _links;
 

@@ -9,38 +9,55 @@ public class CreateCampaignResponse extends MailchimpObject {
 
 	@Field
 	private String id;
+	
 	@Field
 	private String type;
+	
 	@Field
 	private String create_time;
+	
 	@Field
 	private String long_archive_url;
+	
 	@Field
 	private String status;
+	
 	@Field
 	private Integer emails_send;
+	
 	@Field
 	private String send_time;
+	
 	@Field
 	private String content_type;
+	
 	@Field
 	private MailchimpObject settings;
+	
 	@Field
 	private MailchimpObject variate_settings;
+	
 	@Field
 	private MailchimpObject tracking;
+	
 	@Field
 	private MailchimpObject rss_opts;
+	
 	@Field
 	private MailchimpObject ab_split_opts;
+	
 	@Field
 	private MailchimpObject social_cards;
+	
 	@Field
 	private MailchimpObject report_summary;
+	
 	@Field
 	private MailchimpObject delivery_status;
+	
 	@Field
 	private List<MailchimpObject> _links;
+	
 
 	public String getId() {
 		return id;

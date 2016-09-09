@@ -9,12 +9,16 @@ public class SetCampaignContentResponse extends MailchimpObject {
 
 	@Field
 	private List<MailchimpObject> variate_contents;
+	
 	@Field
 	private String plain_text;
+	
 	@Field
 	private String html;
+	
 	@Field
 	private List<MailchimpObject> _links;
+	
 
 	public List<MailchimpObject> getVariate_contents() {
 		return variate_contents;

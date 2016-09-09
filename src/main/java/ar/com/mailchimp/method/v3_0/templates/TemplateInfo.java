@@ -9,30 +9,43 @@ public class TemplateInfo extends MailchimpObject{
 
 	@Field
 	private Integer id;
+	
 	@Field
 	private String type;
+	
 	@Field
 	private String name;
+	
 	@Field
-	private boolean drag_and_drop;
+	private Boolean drag_and_drop;
+	
 	@Field
-	private boolean responsive;
+	private Boolean responsive;
+	
 	@Field
 	private String category;
+	
 	@Field
 	private String date_created;
+	
 	@Field
 	private String created_by;
+	
 	@Field
-	private boolean active;
+	private Boolean active;
+	
 	@Field
 	private String folder_id;
+	
 	@Field
 	private String thumbnail;
+	
 	@Field
 	private String share_url;
+	
 	@Field
-	private List<MailchimpObject> _link;
+	private List<MailchimpObject> _links;
+	
 	
 	public Integer getId() {
 		return id;
@@ -107,10 +120,10 @@ public class TemplateInfo extends MailchimpObject{
 		this.share_url = share_url;
 	}
 	public List<MailchimpObject> get_link() {
-		return _link;
+		return _links;
 	}
-	public void set_link(List<MailchimpObject> _link) {
-		this._link = _link;
+	public void set_link(List<MailchimpObject> _links) {
+		this._links = _links;
 	}
 	
 	

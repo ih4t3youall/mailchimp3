@@ -7,14 +7,19 @@ public class SendCampaignResponse extends MailchimpObject{
 
 	@Field
 	private String type;
+	
 	@Field
 	private String title;
+	
 	@Field
 	private Integer status;
+	
 	@Field
 	private String detail;
+	
 	@Field
 	private String instance;
+	
 
 	public String getType() {
 		return type;

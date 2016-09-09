@@ -8,17 +8,20 @@ import com.ecwid.maleorang.annotation.Field;
 public class GetListsResponse extends MailchimpObject {
 
 	@Field
-	private List<MailchimpObject> lists;
+	private List<ListInfo> lists;
+	
 	@Field
 	private Integer total_items;
+	
 	@Field
 	private List<MailchimpObject> _links;
+	
 
-	public List<MailchimpObject> getLists() {
+	public List<ListInfo> getLists() {
 		return lists;
 	}
 
-	public void setLists(List<MailchimpObject> lists) {
+	public void setLists(List<ListInfo> lists) {
 		this.lists = lists;
 	}
 

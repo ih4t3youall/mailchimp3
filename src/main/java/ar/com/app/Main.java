@@ -9,14 +9,15 @@ import com.ecwid.maleorang.MailchimpClient;
 import com.ecwid.maleorang.MailchimpException;
 import com.ecwid.maleorang.MailchimpObject;
 
-import ar.com.bit8.entities.Bit8Object;
+import ar.com.bit8.entities.Bit8Response;
 import ar.com.mailchimp.method.v3_0.campaign.CreateCampaignMethod;
 import ar.com.mailchimp.method.v3_0.campaign.CreateCampaignResponse;
 import ar.com.mailchimp.method.v3_0.campaign.SendCampaignMethod;
 import ar.com.mailchimp.method.v3_0.campaign.SetCampaignContentMethod;
 import ar.com.mailchimp.method.v3_0.lists.GetListsMethod;
 import ar.com.mailchimp.method.v3_0.lists.GetListsResponse;
-import ar.com.mailchimp.method.v3_0.templates.GetTemplateResponse;
+import ar.com.mailchimp.method.v3_0.lists.ListInfo;
+import ar.com.mailchimp.method.v3_0.templates.GetTemplatesResponse;
 import ar.com.mailchimp.method.v3_0.templates.GetTemplatesMethod;
 import ar.com.mailchimp.method.v3_0.templates.TemplateInfo;
 
@@ -25,127 +26,126 @@ public class Main {
 	private static String apiKey = "5a4074dc9f4af7effe5256b0a1d0c939-us14";
 	private static MailchimpClient client = new MailchimpClient(apiKey);
 	
+	
 	public static void main(String[] args) throws IOException, MailchimpException {
 		
+		String campaign_id;
 		String game_id = "123";
-		Bit8Object bit8 = getBit8(game_id);
+		String templateName = "";
+		String listName = "";
 		
-		String mailchimpListId = getMailchimpListId(bit8.getList_name());
-		bit8.setList_id(mailchimpListId);
-		String campaign_id = createCampaign(bit8);
-		bit8.setCampaign_id(campaign_id);
 		
-		Integer template_id = getTemplate(bit8);
-		bit8.setTemplate_id(template_id);
-		setCampaignContent(bit8);
+		campaign_id = createCampaign(game_id);
+		
+		Bit8Response bit8Response = getBit8Result(game_id);
+		setCampaignContent(bit8Response, templateName, listName, campaign_id);
+		sendCampaign(campaign_id);
+		
 		//sendCampaigns(bit8);
 	}
 
-	public static Bit8Object getBit8(String game_id){
+	public static Bit8Response getBit8Result(String game_id){		
 		
-		Map<String,String> mapa = new LinkedHashMap<>();
+		Bit8Response bit8Response = new Bit8Response();
 		
+		//Call to Bit8 to retrieve the results of the lottery game
+		String draw_number = "#1489";
+		String game_name = "Lotto Lottery";
+		String result_numbers = "04-11-14-20-27-32";
+		//End of the Bit8 call
 		
-		MailchimpObject settings = new MailchimpObject();
-		settings.mapping.put("subject_line", "subject line");
-		settings.mapping.put("from_name", "from_name_watakamasai");
-		settings.mapping.put("reply_to", "watamasai@outlook.com");
+		bit8Response.setDraw_number(draw_number);
+		bit8Response.setGame_name(game_name);
+		bit8Response.setResult_numbers(result_numbers);
 		
-		Bit8Object bit8 = new Bit8Object();
-		bit8.setSettings(settings);
-		
-		bit8.setTemplate_name("Pikachu");
-		bit8.setList_name("Listita");
-		
-		MailchimpObject sections = new MailchimpObject();
-		sections.mapping.put("draw", "MARTIN");
-		sections.mapping.put("game", "El MEJOR");
-		sections.mapping.put("result", "LUCIAN/RENGAR DE TU VIDA!!!!!!!");
-		
-		bit8.setEditable_content(sections);
-		
-		return bit8;
+		return bit8Response;
 		
 	}
 	
-	public static String getMailchimpListId(String list_name) throws IOException, MailchimpException{
-		
-		GetListsMethod getListas = new GetListsMethod();
-		GetListsResponse execute = client.execute(getListas);
-		List<MailchimpObject> lists = execute.getLists();
-		for (MailchimpObject mailchimpObject : lists) {
-			if(mailchimpObject.mapping.get("name").equals(list_name))
-				return (String) mailchimpObject.mapping.get("id");
-		}
-		return null;
-		
-		
-	}
-	
-	public static String createCampaign(Bit8Object bit8) throws IOException, MailchimpException{
-//		GetMemberMethod gtm = new GetMemberMethod("c49405bac5", "m3lton.c@gmail.com");
+	public static String createCampaign(String game_id) throws IOException, MailchimpException{
+
 		CreateCampaignMethod createCampaign = new CreateCampaignMethod();
 		createCampaign.setType("regular");
 		
-//		MailchimpObject settings = new MailchimpObject();
-//		settings.mapping.put("subject_line", "hola1");
-//		settings.mapping.put("from_name", "watamasai");
-//		settings.mapping.put("reply_to", "watamasai@hotmail.com");
+		MailchimpObject settings = new MailchimpObject();
+		settings.mapping.put("subject_line", "Lotto Lottery Results");
+		settings.mapping.put("from_name", "LottoMaster");
+		settings.mapping.put("reply_to", "somemail@example.com");
+		settings.mapping.put("title", "Campaign game: " + game_id);
 		
 		MailchimpObject recipients = new MailchimpObject();
-		recipients.mapping.put("list_id", bit8.getList_id());
-		
+		recipients.mapping.put("list_id", getListIdByName("List+"+game_id) );
 		
 		createCampaign.mapping.put("recipients", recipients);
-		createCampaign.mapping.put("settings",bit8.getSettings());
+		createCampaign.mapping.put("settings",settings);
 		
-		CreateCampaignResponse execute = client.execute(createCampaign);
-		return  execute.getId();
-		
+		CreateCampaignResponse createCampaignResponse = client.execute(createCampaign);
+		return  createCampaignResponse.getId();
 		
 	}
 	
 	
-	public static Integer getTemplate(Bit8Object bit8) throws IOException, MailchimpException{
-//		GetMemberMethod gtm = new GetMemberMethod("c49405bac5", "m3lton.c@gmail.com");
+	public static void setCampaignContent(Bit8Response bit8Response, String templateName, String listName, String campaignId) throws IOException, MailchimpException{
+		
+		SetCampaignContentMethod setCampaignContentMethod = new SetCampaignContentMethod();
+		
+		MailchimpObject template = new MailchimpObject();
+		template.mapping.put("id", getTemplateIdByName(templateName));
+		
+		MailchimpObject sections = new MailchimpObject();
+		sections.mapping.put("draw", "#1489");
+		sections.mapping.put("game", "Lotto Lottery ");
+		sections.mapping.put("result", "04-11-14-20-27-32");
+		template.mapping.put("sections", sections);
+		
+		setCampaignContentMethod.setTemplate(template);
+		setCampaignContentMethod.setCampaign_id(campaignId);
+		
+		client.execute(setCampaignContentMethod);
+		System.out.println("*********************");
+		System.out.println(campaignId);
+		System.out.println("*********************");
+		
+	}
+	
+	
+	public static void sendCampaign(String campaignId) throws IOException, MailchimpException{
+			
+		SendCampaignMethod sendMethod= new SendCampaignMethod();
+		sendMethod.setCampaign_id(campaignId);
+		client.execute(sendMethod);
+			
+	}
+
+
+	public static String getListIdByName(String list_name) throws IOException, MailchimpException{
+		
+		GetListsMethod getLists = new GetListsMethod();
+		GetListsResponse execute = client.execute(getLists);
+		List<ListInfo> lists = execute.getLists();
+		
+		for (ListInfo listInfo : lists) {
+			if(listInfo.getName().equals(list_name))
+				return listInfo.getId();
+		}
+		
+		return null;
+		
+	}
+	
+	
+	public static Integer getTemplateIdByName(String templateName) throws IOException, MailchimpException{
+
 		GetTemplatesMethod getTemplateMethod = new GetTemplatesMethod();
-		GetTemplateResponse execute = client.execute(getTemplateMethod);
+		GetTemplatesResponse execute = client.execute(getTemplateMethod);
 		List<TemplateInfo> templates = execute.getTemplates();
+		
 		for (TemplateInfo templateInfo : templates) {
-			
-			if(templateInfo.mapping.get("name").equals(bit8.getTemplate_name()))
-				return (Integer) templateInfo.mapping.get("id"); 
-			
+			if(templateInfo.getName().equals(templateName))
+				return templateInfo.getId(); 
 		}
 		
 		return null;
 	}
 	
-	public static void sendCampaigns(Bit8Object bit8) throws IOException, MailchimpException{
-		SendCampaignMethod sendMethod= new SendCampaignMethod();
-		sendMethod.campaign_id=bit8.getCampaign_id();
-		client.execute(sendMethod);
-		
-		
-	}
-	
-	public static void setCampaignContent(Bit8Object bit8) throws IOException, MailchimpException{
-		SetCampaignContentMethod setCampaignContentMethod = new SetCampaignContentMethod();
-		
-		MailchimpObject template = new MailchimpObject();
-		template.mapping.put("id", bit8.getTemplate_id());
-		
-		
-		template.mapping.put("sections", bit8.getEditable_content());
-		
-		setCampaignContentMethod.mapping.put("template", template);
-		setCampaignContentMethod.campaign_id = bit8.getCampaign_id();
-		
-		client.execute(setCampaignContentMethod);
-		System.out.println("*********************");
-		System.out.println(bit8.getCampaign_id());
-		System.out.println("*********************");
-		
-	}
-	
-} 
+}

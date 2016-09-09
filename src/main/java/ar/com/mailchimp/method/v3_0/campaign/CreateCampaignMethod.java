@@ -6,24 +6,32 @@ import com.ecwid.maleorang.annotation.APIVersion;
 import com.ecwid.maleorang.annotation.Field;
 import com.ecwid.maleorang.annotation.HttpMethod;
 import com.ecwid.maleorang.annotation.Method;
+import com.ecwid.maleorang.annotation.QueryStringParam;
 
 @Method(httpMethod = HttpMethod.POST, version = APIVersion.v3_0, path = "/campaigns")
 public class CreateCampaignMethod extends MailchimpMethod<CreateCampaignResponse> {
 
 	@Field
 	private String type;
+	
 	@Field
 	private MailchimpObject recipients;
+	
 	@Field
 	private MailchimpObject settings;
+	
 	@Field
 	private MailchimpObject variate_settings;
+	
 	@Field
 	private MailchimpObject tracking;
+	
 	@Field
 	private MailchimpObject rss_opts;
+	
 	@Field
 	private MailchimpObject social_card;
+	
 
 	public String getType() {
 		return type;

@@ -1,9 +1,7 @@
 package ar.com.app;
 
 import java.io.IOException;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.ecwid.maleorang.MailchimpClient;
 import com.ecwid.maleorang.MailchimpException;
@@ -17,13 +15,13 @@ import ar.com.mailchimp.method.v3_0.campaign.SetCampaignContentMethod;
 import ar.com.mailchimp.method.v3_0.lists.GetListsMethod;
 import ar.com.mailchimp.method.v3_0.lists.GetListsResponse;
 import ar.com.mailchimp.method.v3_0.lists.ListInfo;
-import ar.com.mailchimp.method.v3_0.templates.GetTemplatesResponse;
 import ar.com.mailchimp.method.v3_0.templates.GetTemplatesMethod;
+import ar.com.mailchimp.method.v3_0.templates.GetTemplatesResponse;
 import ar.com.mailchimp.method.v3_0.templates.TemplateInfo;
 
 public class Main {
 
-	private static String apiKey = "5a4074dc9f4af7effe5256b0a1d0c939-us14";
+	private static String apiKey = "API-KEY HERE";
 	private static MailchimpClient client = new MailchimpClient(apiKey);
 	
 	

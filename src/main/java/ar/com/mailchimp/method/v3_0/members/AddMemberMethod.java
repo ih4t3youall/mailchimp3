@@ -7,7 +7,6 @@ import com.ecwid.maleorang.annotation.Field;
 import com.ecwid.maleorang.annotation.HttpMethod;
 import com.ecwid.maleorang.annotation.Method;
 import com.ecwid.maleorang.annotation.PathParam;
-import com.ecwid.maleorang.annotation.QueryStringParam;
 
 @Method(httpMethod = HttpMethod.POST, version = APIVersion.v3_0, path = "/lists/{list_id}/members")
 public class AddMemberMethod extends MailchimpMethod<MemberInfo> {

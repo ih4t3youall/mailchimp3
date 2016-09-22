@@ -20,11 +20,11 @@ CreateCampaignMethod createCampaign = new CreateCampaignMethod();
 		CreateCampaignResponse createCampaignResponse = client.execute(createCampaign);
 		
 		
-Remember to set the api key you get from mailchimp. You will use that api key to create the connection. In the class ClientBuilder you can put your mailchimp api-key. 
-Also if you use spring or something like it, you can use that class and inject it where ou need.
+Remember to set the api key you get from mailchimp. You will use that api key to create the connection. In the class ClientBuilder you can put your mailchimp API-Key. 
+Also if you use Spring or something like it, you can use that class and inject it where you need.
 
 The Members list and campaing methods work in a similar way.
-If you need to extends the funcionality  you can refer this page: http://developer.mailchimp.com/documentation/mailchimp/reference/overview/ here you can find the mailchimp api.
+If you need to extends the funcionality  you can refer to this page: http://developer.mailchimp.com/documentation/mailchimp/reference/overview/ here you can find the MailChimp API.
 
 
-This wrapper was developed by Milton Carballo and Martin Lequerica from Accenture, we use a base provided by https://github.com/Ecwid/maleorang.git 
+This wrapper was extended by Milton Carballo and Martin Lequerica from Accenture and based in this implementation: https://github.com/Ecwid/maleorang.git 

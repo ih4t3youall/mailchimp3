@@ -7,6 +7,7 @@ import com.ecwid.maleorang.MailchimpClient;
 import com.ecwid.maleorang.MailchimpException;
 import com.ecwid.maleorang.MailchimpObject;
 
+import ar.com.mailchimp.conection.ClientBuilder;
 import ar.com.mailchimp.method.v3_0.campaign.CreateCampaignMethod;
 import ar.com.mailchimp.method.v3_0.campaign.CreateCampaignResponse;
 import ar.com.mailchimp.method.v3_0.campaign.SendCampaignMethod;
@@ -18,13 +19,21 @@ import ar.com.mailchimp.method.v3_0.templates.TemplateInfo;
 
 public class TestMain {
 
-	private static String apiKey = "INSERT APIKEY HERE";
-	private static MailchimpClient client = new MailchimpClient(apiKey);
+	
+	private static  MailchimpClient client ;
 	
 	
 	public static void main(String[] args) throws IOException, MailchimpException {
+
+		
+		ClientBuilder clientBuilder = new ClientBuilder();
+
+		client = clientBuilder.getClient();
 		
 		String campaign_id;
+		
+
+		
 
 		addSubscriber();
 		

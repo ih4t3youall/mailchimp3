@@ -8,11 +8,10 @@
 	<description>MailChimp API Wrapper for Java</description>
 
 	<developers>
-		
 		<developer>
 			<id>Milton</id>
 			<name>Milton Carballo</name>
-			<email>Milton.a.Carballo@accenture.com</email>
+			<email>carb.milton@gmail.com</email>
 		</developer>
 		<developer>
 			<id>Martin</id>
@@ -22,17 +21,11 @@
 	</developers>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>com.ecwid</groupId>
 			<artifactId>maleorang</artifactId>
 			<version>3.0-0.9.3</version>
 		</dependency>
-
 	</dependencies>
-	
-	
-	<build>
-	
-	</build>
+
 </project>
